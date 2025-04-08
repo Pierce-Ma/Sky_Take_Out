@@ -1,6 +1,7 @@
 package com.sky.controller.admin;
 
 import com.sky.constant.JwtClaimsConstant;
+import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.entity.Employee;
 import com.sky.properties.JwtProperties;
@@ -73,6 +74,37 @@ public class EmployeeController {
     @ApiOperation(value = "退出功能")
     @PostMapping("/logout")
     public Result<String> logout() {
+        return Result.success();
+    }
+
+    /**
+     *
+     * 新增员工
+     *（1）为什么要加Requestbody：前端发过来的 JSON 数据要转换成 Java 对象，并赋值给这个参数。，一般前端默认发给后端的都是json数据
+     * (2) 由于这个接口使用的是post方法，所以我们要加PostMapping，因为前面已经制定了路径，这里我们就不用管了
+     * （3）给API添加注释，方便后续查看管理
+     * (4)新增员工{}的作用可以把后面的employeeDTO的值动态的吸进去。
+     * （5）这个I:EmployeeController,II:EmployeeService,III:EmployeeServiceImpl有这样的关系:
+     *      I:用来处理前端的请求，调用Service来完成具体的业务逻辑
+     *      II:只是写接口，不用写实现。
+     *      III：具体实现 EmployeeService 接口里定义的方法；会操作数据库、调用其它类来完成业务
+     *      如何连接？：
+     *      Controller 注入 Service（通过 @Autowired）
+     *       Service 是一个接口（解耦）
+     *       @Service 注解的实现类 Impl 会自动被 Spring 扫描并注入
+     *
+     *       Controller 层（控制层）	接收前端请求，调用 Service 层	EmployeeController
+     *      Service 层（业务逻辑层）	处理业务逻辑，调用 Mapper 层	EmployeeServiceImpl
+     *      Mapper 层（持久层 / DAO）	操作数据库，执行 SQL	EmployeeMapper
+     *
+     *
+     */
+    @PostMapping
+    @ApiOperation("新增员工")
+    public Result save(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("新增员工:{}", employeeDTO);
+        System.out.println("当前线程ID：" + Thread.currentThread().getId());
+        employeeService.save(employeeDTO);
         return Result.success();
     }
 
