@@ -35,5 +35,5 @@ sky:
     password: 123456  # ⚠️ 建议写真实密码或放到 dev 文件里
   jwt:
     admin-secret-key: itcast
-    admin-ttl: 7200000
+    admin-ttl: 72000000
     admin-token-name: token
