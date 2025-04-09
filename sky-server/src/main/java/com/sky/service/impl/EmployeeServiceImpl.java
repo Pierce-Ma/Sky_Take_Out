@@ -85,12 +85,12 @@ public class EmployeeServiceImpl implements EmployeeService {
             //设置账号密码，默认都给123456,由于需要加密，所以使用这个DigestUtils,这个123456这个常量已经在sky-common里定义的有了。
             employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
             //设置当前时间
-            employee.setCreateTime(LocalDateTime.now());
-            employee.setUpdateTime(LocalDateTime.now());
+            //employee.setCreateTime(LocalDateTime.now());
+           // employee.setUpdateTime(LocalDateTime.now());
             //设置当前创建人id和修改人id
 
-            employee.setCreateUser(BaseContext.getCurrentId());
-            employee.setUpdateUser(BaseContext.getCurrentId());
+           // employee.setCreateUser(BaseContext.getCurrentId());
+           // employee.setUpdateUser(BaseContext.getCurrentId());
             employeeMapper.insert(employee);
         }
 
@@ -147,9 +147,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             Employee employee = new  Employee();
             //进行属性拷贝
             BeanUtils.copyProperties(employeeDTO,employee);
-            employee.setUpdateTime(LocalDateTime.now());
+          //  employee.setUpdateTime(LocalDateTime.now());
             //利用工具类获得当前ID，底层逻辑是通过ThreadLocal
-            employee.setUpdateUser(BaseContext.getCurrentId());
+           // employee.setUpdateUser(BaseContext.getCurrentId());
             employeeMapper.update(employee );
         }
 }
