@@ -129,7 +129,26 @@ public class EmployeeController {
         log.info("启用禁用员工账号:{},{}",status,id);
         employeeService.startOrStop(status,id);
         return Result.success();
+    }
+    @GetMapping("/{id}")
+    @ApiOperation("根据ID查询员工信息")
+    //这里由于接口文档设计的时候是把id作为路径参数的，所以要加@pathVariabke，具体的话还要在搜一下gpt了解原理
+    public Result<Employee> getById(@PathVariable Long id) {
 
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
     }
 
+    /**
+     * 编辑员工信息
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("编辑员工信息")
+    public Result update(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("编辑员工信息：{}",employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
 }
