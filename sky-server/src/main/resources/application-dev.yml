@@ -6,3 +6,8 @@ sky:
     database: sky_take_out
     username: postgres
     password: 123456
+  alioss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    access-key-secret: MeXl4NmvZXBufxeMuZgDQ7eSfKPFTN
+    access-key-id: LTAI5tLwB3fBtJGEgZLQEXsW
+    bucket-name: pierces

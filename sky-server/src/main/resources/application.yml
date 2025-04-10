@@ -37,3 +37,9 @@ sky:
     admin-secret-key: itcast
     admin-ttl: 72000000
     admin-token-name: token
+
+  alioss:
+    access-key-id: ${sky.alioss.access-key-id.}
+    access-key-secret: ${sky.alioss.access-key-secret}
+    endpoint: ${sky.alioss.endpoint}
+    bucket-name: ${sky.alioss.bucket-name}
