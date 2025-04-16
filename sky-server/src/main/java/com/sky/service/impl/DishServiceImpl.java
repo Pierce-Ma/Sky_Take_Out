@@ -126,7 +126,7 @@ public class DishServiceImpl implements DishService {
        //修改菜品基本信息
         dishMapper.update(dish);
         //删除菜品口味数据
-        dishFlavorMapper.deleteByDishId(dishDTO.getId());
+        dishFlavorMapper.deleteByDishId(dish.getId());
 
         //重新插入数据
         List<DishFlavor> flavors = dishDTO.getFlavors();
