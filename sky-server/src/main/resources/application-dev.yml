@@ -11,3 +11,8 @@ sky:
     access-key-secret: MeXl4NmvZXBufxeMuZgDQ7eSfKPFTN
     access-key-id: LTAI5tLwB3fBtJGEgZLQEXsW
     bucket-name: pierces
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 10

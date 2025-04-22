@@ -11,6 +11,12 @@ spring:
     url: jdbc:postgresql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}
     username: ${sky.datasource.username}
     password: ${sky.datasource.password}
+  redis:
+    host: ${sky.redis.host}
+    port: ${sky.redis.port}
+    password: ${sky.redis.password}
+    database: ${sky.redis.database}
+
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
