@@ -6,6 +6,7 @@ import com.sky.dto.SetmealDTO;
 import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
+import com.sky.service.DishService;
 import com.sky.service.MealSetService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,21 +24,29 @@ public class MealSetController {
 
     @Autowired
     private MealSetService mealSetService;
+    private DishService setmealService;
 
     @PostMapping
     @ApiOperation("新增套餐")
     public Result AddMealSet(@RequestBody SetmealDTO setmealDTO) {
-        log.info("新增套餐:{}",setmealDTO);
+        log.info("新增套餐:{}", setmealDTO);
         mealSetService.addNewMealSet(setmealDTO);
         return Result.success();
     }
 
     @GetMapping("/page")
     @ApiOperation("分页查询")
-    public Result<PageResult> Query(SetmealPageQueryDTO setmealPageQueryDTO){
-        log.info("分页查询:{}",setmealPageQueryDTO);
+    public Result<PageResult> Query(SetmealPageQueryDTO setmealPageQueryDTO) {
+        log.info("分页查询:{}", setmealPageQueryDTO);
         PageResult pageResult = mealSetService.pageQuery(setmealPageQueryDTO);
         return Result.success(pageResult);
     }
 
+    @DeleteMapping
+    @ApiOperation("批量删除套餐")
+    public Result delete(@RequestParam List<Long> ids) {
+        mealSetService.deleteBatch(ids);
+        return Result.success();
+
+    }
 }
