@@ -45,7 +45,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         if(list != null && list.size() > 0){
             ShoppingCart cart = list.get(0);
             cart.setNumber(cart.getNumber()+1);//update shopping cart set number = ? where id = ?
-            shoppingCartMapper.updateNumberByid(cart);
+            shoppingCartMapper.updateNumberById(cart);
         }else{
             //判断本次添加到购物车的是菜品还是套餐
             Long dishId = shoppingCartDTO.getDishId();
@@ -96,5 +96,33 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         Long userId = BaseContext.getCurrentId();
         shoppingCartMapper.deleteByUserId(userId);
 
+    }
+
+    /**
+     * 减去购物车的一条数据
+     * @param shoppingCartDTO
+     */
+    public void sub(ShoppingCartDTO shoppingCartDTO) {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        BeanUtils.copyProperties(shoppingCartDTO, shoppingCart);
+        Long userId = BaseContext.getCurrentId();
+
+        shoppingCart.setUserId(userId);
+
+        List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart);
+
+        if(list != null && list.size() > 0){
+            shoppingCart = list.get(0);
+
+            Integer number = shoppingCart.getNumber();
+            if(number == 1){
+                //当前商品在购物车中的份数为1，直接删除当前记录
+                shoppingCartMapper.deleteById(shoppingCart.getId());
+            }else {
+                //当前商品在购物车中的份数不为1，修改份数即可
+                shoppingCart.setNumber(shoppingCart.getNumber() - 1);
+                shoppingCartMapper.updateNumberById(shoppingCart);
+            }
+        }
     }
 }
