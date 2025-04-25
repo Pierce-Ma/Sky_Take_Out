@@ -3,6 +3,7 @@ package com.sky.mapper;
 import com.github.pagehelper.Page;
 import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.core.annotation.Order;
@@ -40,4 +41,7 @@ public interface OrderMapper {
      */
     @Select("select * from orders where id = #{id}")
     Orders queryById(Integer id);
+
+    @Delete("update orders set status = 1 where id = #{id}")
+    void cancel(Integer id);
 }

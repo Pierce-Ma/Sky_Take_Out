@@ -209,5 +209,25 @@ public class OrderServiceImpl implements OrderService {
 
         return orderVO;
     }
+
+    /**
+     * 取消订单
+     * @param id
+     */
+    public void cancel(Integer id) {
+        //1.首先根据id获得当前订单信息
+        Orders orders = orderMapper.queryById(id);
+        if (orders == null) {
+            throw new OrderBusinessException(MessageConstant.ORDER_NOT_FOUND);
+        }
+        //2.将订单信息里的状态改为取消
+
+
+
+        orders.setStatus(Orders.CANCELLED);
+        orders.setCancelReason("用户取消");
+        orders.setCancelTime(LocalDateTime.now());
+        orderMapper.update(orders);
+    }
 }
 
