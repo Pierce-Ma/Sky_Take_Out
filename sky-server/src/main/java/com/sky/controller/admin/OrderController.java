@@ -1,9 +1,11 @@
 package com.sky.controller.admin;
 
 import com.sky.dto.OrdersPageQueryDTO;
+import com.sky.entity.Orders;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.OrderService;
+import com.sky.vo.OrderStatisticsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -28,5 +30,12 @@ public class OrderController {
         log.info("订单功能测试:{}", ordersPageQueryDTO);
         PageResult pageResult =  orderService.Search(ordersPageQueryDTO);
         return Result.success(pageResult);
+    }
+    @ApiOperation("订单数量统计")
+    @GetMapping("/statistics")
+    public Result<OrderStatisticsVO> statistics() {
+
+        OrderStatisticsVO orderStatisticsVO = orderService.getCount();
+        return Result.success(orderStatisticsVO);
     }
 }
