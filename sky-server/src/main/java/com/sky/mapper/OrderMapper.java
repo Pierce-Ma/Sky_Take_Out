@@ -40,7 +40,7 @@ public interface OrderMapper {
      * @return
      */
     @Select("select * from orders where id = #{id}")
-    Orders queryById(Integer id);
+    Orders queryById(Long id);
 
     @Delete("update orders set status = 1 where id = #{id}")
     void cancel(Integer id);

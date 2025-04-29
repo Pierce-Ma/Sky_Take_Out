@@ -38,13 +38,13 @@ public interface OrderService {
      * 查询订单详情
      * @return
      */
-    OrderVO query(Integer id);
+    OrderVO query(Long id);
 
     /**
      * 取消订单
      * @param id
      */
-    void cancel(Integer id);
+    void cancel(Long id);
 
     /**
      * 再来一单功能
@@ -61,4 +61,6 @@ public interface OrderService {
     PageResult Search(OrdersPageQueryDTO ordersPageQueryDTO);
 
     OrderStatisticsVO getCount();
+
+
 }

@@ -200,7 +200,7 @@ public class OrderServiceImpl implements OrderService {
      * @param id
      * @return
      */
-    public OrderVO query(Integer id) {
+    public OrderVO query(Long id) {
         // 根据id查询订单
         Orders orders =  orderMapper.queryById(id);
         // 查询该订单对应的菜品/套餐明细
@@ -217,7 +217,7 @@ public class OrderServiceImpl implements OrderService {
      * 取消订单
      * @param id
      */
-    public void cancel(Integer id) {
+    public void cancel(Long id) {
         //1.首先根据id获得当前订单信息
         Orders orders = orderMapper.queryById(id);
         if (orders == null) {
@@ -331,5 +331,7 @@ public class OrderServiceImpl implements OrderService {
         orderStatisticsVO.setDeliveryInProgress(deliveryInProgress);
         return orderStatisticsVO;
     }
+
+
 }
 
