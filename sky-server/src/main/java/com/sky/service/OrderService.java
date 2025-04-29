@@ -70,4 +70,6 @@ public interface OrderService {
     void rejection(OrdersRejectionDTO ordersRejectionDTO) throws Exception;
 
     void delivery(Long id);
+
+    void complete(Long id);
 }
