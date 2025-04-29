@@ -14,10 +14,8 @@ public interface OrderMapper {
 
 
     void insert(Orders orders);
-    /**
-     * 根据订单号查询订单
-     * @param orderNumber
-     */
+
+
     @Select("select * from orders where number = #{orderNumber}")
     Orders getByNumber(String orderNumber);
 
